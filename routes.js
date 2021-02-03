@@ -64,13 +64,13 @@ module.exports = someText;
 
     you will be deleting the previous value and reasigning a new one. It could cause errors!
 */
-//module.exports = requestHandler;
+module.exports = requestHandler;
 
 // #2 exporting several variables
-module.exports = {
+/*module.exports = {
   handler: requestHandler,
   text: someText,
-};
+};*/
 
 // #3 exporting several variables
 //module.exports.handler = requestHandler;

@@ -1,8 +1,14 @@
 const http = require('http');
 
-const routes = require('./routes');
-console.log('exported text: ', routes.text);
-const server = http.createServer(routes.handler);
+//express is a well built function
+const express = require('express');
+
+//it returns another function after being executed
+const app = express();
+
+/*The previous resultant function is actually 
+a valid request handler*/
+const server = http.createServer(app);
 
 const PORT = 3000;
 
