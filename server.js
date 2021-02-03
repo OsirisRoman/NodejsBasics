@@ -1,43 +1,31 @@
-const http = require('http');
-
-//express is a well built function
 const express = require('express');
 
-//it returns another function after being executed
 const app = express();
 
-/*Express is based on handling middlewares.
-Middlewares are functions which are executed after 
-catching any incoming request of any type.
+/*
+Incoming requests do not do full path validation, 
+therefore if the '/' path is at the begining it 
+will match with every request, in order to avoid 
+this, it is necessary to place it at the bottom 
+og the rest of middlewares.
 */
-/*"app.use" tells express to execute certain middleware 
-after detect an incoming request*/
-app.use((req, res, next) => {
-  console.log("I'm a middleware!");
+app.use('/', (req, res, next) => {
+  console.log('I always execute because not request full path checking!');
   next();
 });
 
-app.use((req, res, next) => {
-  console.log("I'm the second middleware!");
-  res.send('<h1>Hello from express</h1>');
+app.use('/add-product', (req, res, next) => {
+  console.log("I'm on the add product page!");
+  res.send('<h1>Hello from ADD PRODUCT page</h1>');
 });
 
-app.use((req, res, next) => {
-  console.log("I'm the third middleware!");
+app.use('/', (req, res, next) => {
+  console.log("I'm on the home page!");
+  res.send('<h1>Hello from HOME page</h1>');
 });
-
-//const server = http.createServer(app);
 
 const PORT = 3000;
 
-/*Using the function app.listen express makes the 
-creation and listening for us, and this reduce our }
-code legibility.
-*/
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
-
-/*app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});*/
