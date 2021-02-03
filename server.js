@@ -14,6 +14,20 @@ catching any incoming request of any type.
 after detect an incoming request*/
 app.use((req, res, next) => {
   console.log("I'm a middleware!");
+  next();
+});
+
+/*The express middlewares will need three parameters: 
+The request, the response and the function next that 
+tells the server to execute the following middleware*/
+app.use((req, res, next) => {
+  console.log("I'm the second middleware!");
+});
+
+/*The next middleware will not be executed because 
+the previous one didn't execute the next function. */
+app.use((req, res, next) => {
+  console.log("I'm the third middleware!");
 });
 
 /*The previous "app" resultant function is actually 
