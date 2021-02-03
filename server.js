@@ -17,34 +17,27 @@ app.use((req, res, next) => {
   next();
 });
 
-/*The express middlewares will need three parameters: 
-The request, the response and the function next that 
-tells the server to execute the following middleware*/
 app.use((req, res, next) => {
   console.log("I'm the second middleware!");
-  /* To send a response it is necessary to do it 
-  inside of the middleware. The difference is that 
-  express handles the Content-Type automatically.
-  */
   res.send('<h1>Hello from express</h1>');
 });
 
-/*The next middleware will not be executed because 
-the previous one didn't execute the next function. */
 app.use((req, res, next) => {
-  /*It is necessary to mention that if a previous 
-  middleware send the response back to the client 
-  the rest of the middlewares which haven't 
-  executed yet, are not reached/executed */
   console.log("I'm the third middleware!");
 });
 
-/*The previous "app" resultant function is actually 
-a valid request handler*/
-const server = http.createServer(app);
+//const server = http.createServer(app);
 
 const PORT = 3000;
 
-server.listen(PORT, () => {
+/*Using the function app.listen express makes the 
+creation and listening for us, and this reduce our }
+code legibility.
+*/
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
+
+/*app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});*/
