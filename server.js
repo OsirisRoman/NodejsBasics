@@ -16,10 +16,12 @@ added by express will be undefined
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /*
-In the same way as before, the order of the routes matter.
-The requests directed to '/' must be used cautiously.
+With this new addition we filter request with a 
+common starting path for all routes that use it 
+and are placed in a given file. In this example 
+we filter the ones that comes to our /admin/ path.
 */
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
 app.use(publicRoutes);
 
 app.use((req, res, next) => {
