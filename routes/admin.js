@@ -3,6 +3,7 @@ const express = require('express');
 the full path of our files*/
 const path = require('path');
 
+const rootDir = require('../utils/path');
 const router = express.Router();
 
 // /admin/add-product => GET
@@ -20,7 +21,7 @@ router.get('/add-product', (req, res, next) => {
   __dirname is a global variable that stores the 
   absolute path in our operative system to this folder
   */
-  res.sendFile(path.join(__dirname, '../', 'views', 'add-product.html'));
+  res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
 });
 
 // /admin/product => POST
