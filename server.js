@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use('/admin', adminRoutes);
 app.use(publicRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).send('<h1>You might be lost: 404 NOT FOUND</h1>');
+  res.status(404).sendFile(path.join(__dirname, 'views', '404NotFound.html'));
 });
 
 const PORT = 3000;
