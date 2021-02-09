@@ -18,7 +18,7 @@ app.use('/admin', adminRoutes.router);
 app.use(publicRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404NotFound.html'));
+  res.status(404).render('404NotFound');
 });
 
 const PORT = 3000;

@@ -16,6 +16,9 @@
   font: inherit;
   border-radius: 2px;
 }
+.form-control input:focus {
+  outline-color: #00695c;
+}
 button {
   font: inherit;
   border: 1px solid #3e00a1;
