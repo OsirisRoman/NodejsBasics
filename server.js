@@ -18,7 +18,7 @@ app.use('/admin', adminRoutes.router);
 app.use(publicRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).render('404NotFound');
+  res.status(404).render('404NotFound', { pageTitle: '404 Not Found' });
 });
 
 const PORT = 3000;
