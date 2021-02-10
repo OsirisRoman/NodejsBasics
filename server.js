@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminRoutes.router);
+app.use('/admin', adminRoutes);
 app.use(publicRoutes);
 
 app.use((req, res, next) => {
