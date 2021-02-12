@@ -26,8 +26,11 @@ const getProductsFromFile = (myCallBackFunc) => {
 }
 
 module.exports = class Product {
-    constructor(title){
-        this.title = title;
+    constructor(name, imageUrl, description, price){
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.price = price;
     }
     save(){
         //Get all products from the data file

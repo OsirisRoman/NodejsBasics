@@ -12,8 +12,15 @@ const getProductList = (req, res, next) => {
 
 const getUserCart = (req, res, next) => {
   res.render('shop/cart', {
-    pageTitle: 'User Cart',
+    pageTitle: 'Your Cart',
     path: '/cart',
+  });
+}
+
+const getUserOrders = (req, res, next) => {
+  res.render('shop/orders', {
+    pageTitle: 'Your Orders',
+    path: '/orders',
   });
 }
 
@@ -41,6 +48,7 @@ const getProductDetails = (req, res, next) => {
 module.exports = {
   getProductList,
   getUserCart,
+  getUserOrders,
   goToCheckout,
   goToHome,
   getProductDetails,

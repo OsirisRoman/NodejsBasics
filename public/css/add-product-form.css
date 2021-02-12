@@ -1,3 +1,11 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+input[type="number"] {
+   -moz-appearance: textfield;
+}
 .product-form {
   width: 20rem;
   max-width: 90%;
@@ -7,16 +15,19 @@
   margin: 1rem 0;
 }
 .form-control label,
-.form-control input {
+.form-control input,
+.form-control textarea {
   display: block;
   width: 100%;
 }
-.form-control input {
+.form-control input,
+.form-control textarea {
   border: 1px solid #dbc441;
   font: inherit;
   border-radius: 2px;
 }
-.form-control input:focus {
+.form-control input:focus,
+.form-control textarea:focus {
   outline-color: #00695c;
 }
 button {

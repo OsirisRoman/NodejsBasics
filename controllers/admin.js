@@ -8,7 +8,7 @@ const getAddProduct = (req, res, next) => {
 }
 
 const postAddProduct = (req, res) => {
-    const product = new Product(req.body.productname)
+    const product = new Product(...Object.values(req.body));
     product.save();
     res.redirect('/');
 }
@@ -24,7 +24,7 @@ const getProductList = (req, res, next) => {
     Product.fetchAll( products => {
         res.render('admin/product-list', {
           prods: products,
-          pageTitle: 'Product List',
+          pageTitle: 'Admin Products',
           path: '/admin/product-list',
         });
     });
