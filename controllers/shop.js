@@ -39,6 +39,8 @@ const goToHome = (req, res, next) => {
 }
 
 const getProductDetails = (req, res, next) => {
+  const productId = req.params.productId;
+  Product.getById(productId, product => {console.log(product)});
   res.render('shop/product-details', {
     pageTitle: 'Product Details',
     path: '/product-details.ejs',

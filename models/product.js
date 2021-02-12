@@ -1,3 +1,4 @@
+const { privateDecrypt } = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -27,6 +28,10 @@ const getProductsFromFile = (myCallBackFunc) => {
 
 module.exports = class Product {
     constructor(name, imageUrl, description, price){
+        /*Date.now is a JavaScript built-in 
+        function which allow us to get the number 
+        of miliseconds ELAPSED SINCE January 1, 1970*/
+        this.id = Date.now().toString();
         this.name = name;
         this.imageUrl = imageUrl;
         this.description = description;
@@ -53,5 +58,11 @@ module.exports = class Product {
     when the data has finished to be read.*/
     static fetchAll(myCallBackFunc){
         getProductsFromFile(myCallBackFunc);
+    }
+
+    static getById(productId, myCallBackFunc){
+        getProductsFromFile(products => {
+            myCallBackFunc(products.find( product => ( product.id === productId )));
+        })
     }
 }
