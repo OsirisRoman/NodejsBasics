@@ -1,3 +1,4 @@
+const { timeStamp } = require('console');
 const { privateDecrypt } = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -48,8 +49,12 @@ module.exports = class Product {
             the next function replace its content by the new list 
             of products parsed as a string. It also calls a callback 
             that prints any error in case of an error happens.*/
+            timeStamp
             fs.writeFile(productsFilePath, JSON.stringify(products), error => {
-                console.log(error);
+                //Just print the error if there occurs an error while writing the file.
+                if(error){
+                    console.log(error);
+                }
             });
         });
     }
