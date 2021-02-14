@@ -2,9 +2,9 @@
     <link rel="stylesheet" href="/css/product.css" />
   <%- include('../includes/navigation.ejs') %>
     <main>
-    <% if(prods.length > 0) { %>
+    <% if(productList.length > 0) { %>
     <div class="grid">
-      <% for (let product of prods){ %>
+      <% for (let product of productList){ %>
       <article class="card product-item">
         <header class="card__header">
           <h1 class="product__title"><%= product.name %></h1>
@@ -23,9 +23,7 @@
         </div>
         <div class="card__actions">
           <a class="btn" href="/product-details/<%= product.id %>">See Details</a>
-          <form action="/add-to-cart" method="POST">
-            <button class="btn">Add to Cart</button>
-          </form>
+          <%- include('../includes/add-to-cart.ejs', {product: product}) %>
         </div>
       </article>
       <% } %>
