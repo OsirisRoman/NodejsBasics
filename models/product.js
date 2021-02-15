@@ -26,11 +26,11 @@ const getProductsFromFile = (myCallBackFunc) => {
 }
 
 module.exports = class Product {
-    constructor(name, imageUrl, description, price){
+    constructor(id=Date.now().toString(), name, imageUrl, description, price){
         /*Date.now is a JavaScript built-in 
         function which allow us to get the number 
         of miliseconds ELAPSED SINCE January 1, 1970*/
-        this.id = Date.now().toString();
+        this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.description = description;
@@ -39,9 +39,16 @@ module.exports = class Product {
     save(){
         //Get all products from the data file
         getProductsFromFile(products => {
-            /*takes the new product that came inside the 
-            request and add it to the list of products*/
-            products.push(this);
+            //Check if the product already exist
+            const productIndex = products.findIndex(product => product.id === this.id);
+            if(productIndex === -1){
+                /*takes the new product that came inside the 
+                request and add it to the list of products*/
+                products.push(this);
+            }else {
+                /*If the product already exist, then it is just updated */
+                products[productIndex] = this;
+            }
             /*In case the file do not exist the next function 
             creates a new file, if the files do actually exist, then 
             the next function replace its content by the new list 
