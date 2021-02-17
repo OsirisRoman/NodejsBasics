@@ -10,7 +10,6 @@ function backdropClickHandler() {
 function menuToggleClickHandler() {
   backdrop.style.display = 'block';
   sideDrawer.classList.add('open');
-  console.log('open');
 }
 
 backdrop.addEventListener('click', backdropClickHandler);

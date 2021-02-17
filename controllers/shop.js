@@ -12,10 +12,34 @@ const getProductList = (req, res, next) => {
 }
 
 const getUserCart = (req, res, next) => {
-  res.render('shop/cart', {
-    pageTitle: 'Your Cart',
-    path: '/cart',
-  });
+  Cart.getProducts(cart => {
+    Product.fetchAll(products => {
+      const userCart = {products: [], totalToPay: 0};
+      cart.products.forEach(cartProduct => {
+        const foundProduct = products.find(product => product.id === cartProduct.id);
+        userCart.products.push({...foundProduct, quantity: cartProduct.quantity});
+      })
+      userCart.totalToPay = cart.totalToPay;
+      
+      res.render('shop/cart', {
+        pageTitle: 'Your Cart',
+        path: '/cart',
+        products: userCart.products,
+        totalToPay: userCart.totalToPay,
+      });
+
+    })
+  })
+}
+
+const postDeleteProductFromCart = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.fetchAll(products => {
+      const userCartProducts = []
+      priceOfProductToRemove = products.find(product => product.id === productId).price;
+      Cart.deleteProduct(productId, priceOfProductToRemove);
+      res.redirect('/cart');
+    })
 }
 
 const postUserCart = (req, res, next) => {
@@ -62,6 +86,7 @@ module.exports = {
   getProductList,
   getUserCart,
   postUserCart,
+  postDeleteProductFromCart,
   getUserOrders,
   goToCheckout,
   goToHome,

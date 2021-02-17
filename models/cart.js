@@ -44,7 +44,28 @@ module.exports = class Cart {
                 cart.products.push({id: id, quantity: 1});
             }
             //At the same time the total amout of payment is increased respectively
-            cart.totalToPay = cart.totalToPay + Number(productPrice);
+            cart.totalToPay = Number(cart.totalToPay) + Number(productPrice);
+            cart.totalToPay = cart.totalToPay.toFixed(2);
+            //Finally the file replace its content by the new generated one
+            fs.writeFile(cartFilePath, JSON.stringify(cart), error => {
+                if(error){
+                    console.log(error);
+                }
+            })
+        })
+    }
+    static getProducts(myCallBackFunc){
+        getCartFromFile(cart => {
+            myCallBackFunc(cart);
+        })
+    }
+    static deleteProduct(productId, price){
+        getCartFromFile(cart => {
+            const removedProduct = cart.products.find(product => product.id === productId);
+            if(!removedProduct) return; 
+            cart.products = cart.products.filter(product => product.id !== productId);
+            cart.totalToPay = Number(cart.totalToPay) - (price * removedProduct.quantity);
+            cart.totalToPay = cart.totalToPay.toFixed(2);
             //Finally the file replace its content by the new generated one
             fs.writeFile(cartFilePath, JSON.stringify(cart), error => {
                 if(error){

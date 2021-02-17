@@ -9,7 +9,7 @@ const getAddProduct = (req, res, next) => {
 }
 
 const postAddProduct = (req, res) => {
-    const product = new Product(...Object.values(req.body));
+    const product = new Product(undefined, ...Object.values(req.body));
     product.save();
     res.redirect('/');
 }
@@ -38,6 +38,12 @@ const postEditProduct = (req, res) => {
   res.redirect('/admin/product-list');
 }
 
+const postDeleteProduct = (req, res) => {
+  const productId = req.body.productId;
+  Product.deleteFromProductsList(productId);
+  res.redirect('/admin/product-list');
+}
+
 const getProductList = (req, res, next) => {
     Product.fetchAll( products => {
         res.render('admin/product-list', {
@@ -53,5 +59,6 @@ module.exports = {
     postAddProduct,
     getEditProduct,
     postEditProduct,
+    postDeleteProduct,
     getProductList
 }

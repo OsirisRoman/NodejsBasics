@@ -1,3 +1,4 @@
+const Cart = require('./cart')
 const fs = require('fs');
 const path = require('path');
 
@@ -60,6 +61,24 @@ module.exports = class Product {
                     console.log(error);
                 }
             });
+        });
+    }
+    static deleteFromProductsList(productId){
+        //Get all products from the data file
+        getProductsFromFile(products => {
+            const productToRemove = products.find(product => product.id === productId);
+            //Create a new Array without the product that the user wants to delete
+            const updatedProductList = products.filter(product => product.id !== productId);
+            
+            /*then save the result in the product.json file. It also calls a callback 
+            that prints any error in case of an error happens.*/
+            fs.writeFile(productsFilePath, JSON.stringify(updatedProductList), error => {
+                //Just print the error if there occurs an error while writing the file.
+                if(error){
+                    console.log(error);
+                }
+            });
+            Cart.deleteProduct(productId, productToRemove.price);
         });
     }
     /*Given that fetch all contains an async function it is 
