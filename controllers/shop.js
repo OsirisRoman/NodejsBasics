@@ -42,8 +42,9 @@ const postDeleteProductFromCart = (req, res, next) => {
   const productId = req.body.productId;
   (async () => {
     const products = await Product.fetchAll();
-    priceOfProductToRemove = products.find(product => product.id === productId)
-      .price;
+    priceOfProductToRemove = products.find(
+      product => product.id === Number(productId)
+    ).price;
     Cart.deleteProduct(productId, priceOfProductToRemove);
     res.redirect('/cart');
   })().catch(err => console.log(err.stack));
