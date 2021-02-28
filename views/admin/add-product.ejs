@@ -8,7 +8,7 @@
           <label for="productname">Product Name</label>
           <input type="text" name="name" id="productname" <%if(editMode){ %>value="<%=product.name%>"<% } %> />
           <label for="productimage">Image Url</label>
-          <input type="url" name="image" id="productimage"  <%if(editMode){ %>value="<%=product.imageUrl%>"<% } %> />
+          <input type="url" name="imageUrl" id="productimage"  <%if(editMode){ %>value="<%=product.imageUrl%>"<% } %> />
           <label for="productdescription">Description</label>
           <textarea Form="add-product-form" rows ="5" name="description" ><%if(editMode){ %><%=product.description%><% } %></textarea>
           <label for="productPrice">Price</label>

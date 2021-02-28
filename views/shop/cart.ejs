@@ -7,7 +7,7 @@
                 <ul>
                     <%products.forEach(product => {%>
                         <li>
-                            <p><%= product.name %> (<%= product.quantity %>)</p>
+                            <p><%= product.name %> (<%= product.cartitem.quantity %>)</p>
                             <form action="/delete-product-from-cart" method="POST">
                                 <input type="hidden" name="productId" value="<%= product.id %>" />
                                 <button type="submit">Delete Product</button>
@@ -15,10 +15,15 @@
                         </li>
                     <%})%>
                 </ul>
-                <h1>Total: $<%=totalToPay%></h1>
+                <hr>
+                <div class="centered">
+                    <h1>Total: $<%=totalToPay%></h1>
+                    <form action="/create-order" method="POST" >
+                        <button class="btn" type="submit"> Order Now!! </button>
+                    </form>
+                </div>
             <%} else {%>
                 <h1>There are no products in your cart yet...</h1>
             <% } %>
-        <button type="button" onclick="location.href='/checkout'"> Go to Checkout </button>
 
 <%- include('../includes/end.ejs') %>
