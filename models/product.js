@@ -34,6 +34,19 @@ module.exports = class Product {
     this.price = price;
   }
 
+  static async createModel() {
+    const createTable = `
+                          CREATE TABLE IF NOT EXISTS products (
+                              id serial primary key,
+                              name varchar,
+                              price numeric(5,2),
+                              description varchar,
+                              imageurl varchar
+                          )
+                        `;
+    await execQuery(createTable);
+  }
+
   async save() {
     const myProduct = [this.name, this.price, this.description, this.imageUrl];
     let arrResult = [];
